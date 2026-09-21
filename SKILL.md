@@ -31,7 +31,7 @@ Follow [references/report-spec.md](references/report-spec.md). Give requirements
 
 When modules have distinct user journeys or data models, create separate standalone reports for them. Keep shared identity, media, authentication, and infrastructure visible as external dependencies in each report rather than duplicating ownership.
 
-Generate standalone UTF-8 HTML with embedded CSS and JavaScript. Do not rely on a CDN or fetch local data at runtime. Include a linked table of contents, readable print styles, searchable catalogs, expandable detail blocks, and diagrams that remain understandable when printed.
+Generate standalone UTF-8 HTML with embedded CSS and JavaScript. Do not rely on a CDN or fetch local data at runtime. Include a linked catalog index (目录索引) covering report files, sections, modules, and physical tables; keep it sticky and searchable on screen, and print it as the first directory page. Also include readable print styles, searchable catalogs, expandable detail blocks, and diagrams that remain understandable when printed.
 
 For database and class documentation, follow [references/er-and-class-design.md](references/er-and-class-design.md). The ER diagram must use Crow's Foot cardinality, show physical table names with Chinese business names, expose key fields and SQL types, identify PK and FK columns, and match the actual foreign keys. Also provide field tables because a diagram alone is not a schema specification.
 

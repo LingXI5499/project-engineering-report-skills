@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>芋道 ruoyi-vue-pro 软件工程全景报告</title>
+<style>
+:root { --bg:#f4f1ea; --paper:#fff; --ink:#1c1917; --muted:#57534e; --line:#d6d3d1; --accent:#9a3412; --ok:#166534; --warn:#92400e; --chip:#e7e5e4; --rail:280px; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.65 "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg)}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;padding:8px}
+.skip:focus{left:8px;z-index:9}
+.layout{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);min-height:100vh}
+.toc-rail{position:sticky;top:0;height:100vh;overflow:auto;background:#fff7ed;border-right:1px solid var(--line);padding:14px 12px 32px}
+.toc-rail h1{font-size:15px;margin:0 0 8px}
+.toc-rail .toc-search{width:100%;padding:6px 8px;border:1px solid var(--line);margin:0 0 10px}
+.toc-rail a{color:var(--accent);text-decoration:none;display:block;padding:2px 4px;border-radius:4px}
+.toc-rail a:hover,.toc-rail a.active{background:#ffedd5}
+.toc-rail ul{list-style:none;margin:0;padding:0 0 0 8px}
+.toc-rail > ul{padding-left:0}
+.toc-rail li{margin:1px 0}
+.toc-rail details{border:0;padding:0;margin:4px 0;background:transparent}
+.toc-rail summary{cursor:pointer;font-weight:600;font-size:13px}
+.toc-rail .muted{font-size:12px}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 22px 80px}
+header.hero{background:var(--paper);border:1px solid var(--line);padding:28px 28px 22px;margin-bottom:20px}
+header.hero h1{margin:0 0 8px;font-size:28px}
+.meta,.muted{color:var(--muted)}
+nav.toc-inline{display:none}
+section{background:var(--paper);border:1px solid var(--line);padding:22px 24px;margin:0 0 18px}
+h2{margin:0 0 12px;font-size:22px;border-bottom:2px solid var(--accent);padding-bottom:6px}
+h3{margin:22px 0 10px;font-size:18px}
+h4{margin:16px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 16px}
+th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+th{background:#fafaf9}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px;align-items:center}
+input[type=search],select{padding:6px 8px;border:1px solid var(--line);min-width:220px}
+.chip{display:inline-block;background:var(--chip);padding:1px 8px;border-radius:999px;font-size:12px;margin-right:4px}
+.ok{color:var(--ok)} .warn{color:var(--warn)}
+details{border:1px solid var(--line);padding:8px 12px;margin:8px 0;background:#fafaf9}
+details>summary{cursor:pointer;font-weight:600}
+.tree{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;white-space:pre-wrap;background:#fafaf9;border:1px solid var(--line);padding:12px;overflow:auto}
+svg.er{width:100%;max-width:1100px;background:#fff;border:1px solid var(--line)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:12px 0}
+.kpi div{border:1px solid var(--line);padding:10px;background:#fafaf9}
+.kpi b{display:block;font-size:20px}
+.callout{border-left:4px solid var(--accent);padding:8px 12px;background:#fff7ed;margin:12px 0}
+a.ext,.wrap a{color:var(--accent)}
+footer{color:var(--muted);font-size:12px;margin-top:24px}
+.index-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin:12px 0}
+.index-grid a{display:block;border:1px solid var(--line);padding:8px 10px;background:#fafaf9;text-decoration:none}
+.index-grid a:hover{background:#ffedd5}
+@media print{
+  .toc-rail{position:static;height:auto;page-break-after:always;border:1px solid #000}
+  .layout{display:block}
+  body{background:#fff}
+  .toolbar{break-inside:avoid}
+  section,details{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+  header.hero,section{border-color:#000}
+}
+@media (max-width:960px){
+  .layout{display:block}
+  .toc-rail{position:relative;height:auto;max-height:42vh}
+  table{display:block;overflow:auto}
+  .wrap{padding:12px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<div class="layout">
+<aside class="toc-rail" id="toc-rail" aria-label="目录索引">
+<h1>目录索引</h1>
+<input class="toc-search" id="toc-q" type="search" placeholder="筛选目录…" oninput="filterToc()">
+<p class="muted">粘性侧栏，打印时作为首页目录。</p>
+<ul><li><a href="#scope">1. 范围与证据</a></li><li><a href="#reports">2. 报告分册</a></li><li><details open><summary><a href="#catalog">3. 目录索引</a></summary><ul><li><a href="#catalog-files">分册文件</a></li><li><a href="#catalog-platform">平台章节</a></li><li><a href="#catalog-biz">业务模块</a></li><li><details open><summary><a href="#catalog-tables">主库表（48）</a></summary><ul><li><a href="01-platform-system-infra.html#tbl-infra_api_access_log">infra_api_access_log</a></li><li><a href="01-platform-system-infra.html#tbl-infra_api_error_log">infra_api_error_log</a></li><li><a href="01-platform-system-infra.html#tbl-infra_codegen_column">infra_codegen_column</a></li><li><a href="01-platform-system-infra.html#tbl-infra_codegen_table">infra_codegen_table</a></li><li><a href="01-platform-system-infra.html#tbl-infra_config">infra_config</a></li><li><a href="01-platform-system-infra.html#tbl-infra_data_source_config">infra_data_source_config</a></li><li><a href="01-platform-system-infra.html#tbl-infra_file">infra_file</a></li><li><a href="01-platform-system-infra.html#tbl-infra_file_config">infra_file_config</a></li><li><a href="01-platform-system-infra.html#tbl-infra_file_content">infra_file_content</a></li><li><a href="01-platform-system-infra.html#tbl-infra_job">infra_job</a></li><li><a href="01-platform-system-infra.html#tbl-infra_job_log">infra_job_log</a></li><li><a href="01-platform-system-infra.html#tbl-system_dept">system_dept</a></li><li><a href="01-platform-system-infra.html#tbl-system_dict_data">system_dict_data</a></li><li><a href="01-platform-system-infra.html#tbl-system_dict_type">system_dict_type</a></li><li><a href="01-platform-system-infra.html#tbl-system_login_log">system_login_log</a></li><li><a href="01-platform-system-infra.html#tbl-system_mail_account">system_mail_account</a></li><li><a href="01-platform-system-infra.html#tbl-system_mail_log">system_mail_log</a></li><li><a href="01-platform-system-infra.html#tbl-system_mail_template">system_mail_template</a></li><li><a href="01-platform-system-infra.html#tbl-system_menu">system_menu</a></li><li><a href="01-platform-system-infra.html#tbl-system_notice">system_notice</a></li><li><a href="01-platform-system-infra.html#tbl-system_notify_message">system_notify_message</a></li><li><a href="01-platform-system-infra.html#tbl-system_notify_template">system_notify_template</a></li><li><a href="01-platform-system-infra.html#tbl-system_oauth2_access_token">system_oauth2_access_token</a></li><li><a href="01-platform-system-infra.html#tbl-system_oauth2_approve">system_oauth2_approve</a></li><li><a href="01-platform-system-infra.html#tbl-system_oauth2_client">system_oauth2_client</a></li><li><a href="01-platform-system-infra.html#tbl-system_oauth2_code">system_oauth2_code</a></li><li><a href="01-platform-system-infra.html#tbl-system_oauth2_refresh_token">system_oauth2_refresh_token</a></li><li><a href="01-platform-system-infra.html#tbl-system_operate_log">system_operate_log</a></li><li><a href="01-platform-system-infra.html#tbl-system_post">system_post</a></li><li><a href="01-platform-system-infra.html#tbl-system_role">system_role</a></li><li><a href="01-platform-system-infra.html#tbl-system_role_menu">system_role_menu</a></li><li><a href="01-platform-system-infra.html#tbl-system_sms_channel">system_sms_channel</a></li><li><a href="01-platform-system-infra.html#tbl-system_sms_code">system_sms_code</a></li><li><a href="01-platform-system-infra.html#tbl-system_sms_log">system_sms_log</a></li><li><a href="01-platform-system-infra.html#tbl-system_sms_template">system_sms_template</a></li><li><a href="01-platform-system-infra.html#tbl-system_social_client">system_social_client</a></li><li><a href="01-platform-system-infra.html#tbl-system_social_user">system_social_user</a></li><li><a href="01-platform-system-infra.html#tbl-system_social_user_bind">system_social_user_bind</a></li><li><a href="01-platform-system-infra.html#tbl-system_tenant">system_tenant</a></li><li><a href="01-platform-system-infra.html#tbl-system_tenant_package">system_tenant_package</a></li><li><a href="01-platform-system-infra.html#tbl-system_user_post">system_user_post</a></li><li><a href="01-platform-system-infra.html#tbl-system_user_role">system_user_role</a></li><li><a href="01-platform-system-infra.html#tbl-system_users">system_users</a></li><li><a href="01-platform-system-infra.html#tbl-yudao_demo01_contact">yudao_demo01_contact</a></li><li><a href="01-platform-system-infra.html#tbl-yudao_demo02_category">yudao_demo02_category</a></li><li><a href="01-platform-system-infra.html#tbl-yudao_demo03_course">yudao_demo03_course</a></li><li><a href="01-platform-system-infra.html#tbl-yudao_demo03_grade">yudao_demo03_grade</a></li><li><a href="01-platform-system-infra.html#tbl-yudao_demo03_student">yudao_demo03_student</a></li></ul></details></li><li><a href="#catalog-quartz">Quartz 表</a></li></ul></details></li><li><a href="#counts">4. 核验计数</a></li><li><details open><summary>打开分册</summary><ul><li><a href="01-platform-system-infra.html">平台分册</a></li><li><a href="02-business-modules.html">业务分册</a></li></ul></details></li></ul>
+<p><button type="button" onclick="expandAll(true)">展开正文</button>
+<button type="button" onclick="expandAll(false)">折叠正文</button></p>
+</aside>
+<div class="wrap" id="main">
+
+<header class="hero">
+<h1>芋道 ruoyi-vue-pro 软件工程全景报告</h1>
+<p>目标仓库 <a class="ext" href="https://github.com/YunaiV/ruoyi-vue-pro">YunaiV/ruoyi-vue-pro</a>。
+检出版本 <code>v2026.08(jdk8/11)-47-g8e80602b87</code>，提交 <code>8e80602b875f</code>，提交时间 2026-09-19T11:22:32+08:00，分支 <code>master</code>，与 <code>origin/master</code> 左右提交差 0/0。
+POM <code>revision</code> 为 2026.08-jdk8-SNAPSHOT。工作区干净。</p>
+<p class="meta">报告生成时间 2026-09-21 22:02 +0800。许可证 MIT。前端工程本体不在本仓库，见分册说明。左侧为可检索目录索引。</p>
+</header>
+<section id="scope">
+<h2>1. 范围与证据</h2>
+<p>本分析只描述当前检出提交的仓库状态，不把 README 功能清单或演示站当成已启用实现。证据分层如下。</p>
+<ul>
+<li>版本：分析时仓库根为 <code>E:/code/ruoyi-vue-pro</code>，远程 https://github.com/YunaiV/ruoyi-vue-pro.git ，<code>git fetch</code> 后 HEAD 等于 origin/master。</li>
+<li>物理库表：<code>sql/mysql/ruoyi-vue-pro.sql</code>（头注释 Date 2026-09-04，早于 HEAD 15 天）与 <code>sql/mysql/quartz.sql</code>。</li>
+<li>默认可运行后端：根 POM 与 <code>yudao-server/pom.xml</code> 仅启用 <code>yudao-module-system</code>、<code>yudao-module-infra</code>。其余业务模块源码在仓库内，但默认依赖被注释。</li>
+<li>菜单：该 MySQL 脚本仍插入全产品菜单 2061 条，因此“库里的菜单”大于“默认构建能提供的 API”。</li>
+<li>前端：本仓库 <code>yudao-ui/yudao-ui-admin-vue3</code> 仅有 README 与 1 个 MES 残留页面；完整管理端在独立仓库 yudao-ui-admin-vue3。</li>
+<li>演示站只读观察（2026-09-21）：<code>http://dashboard-vue3.yudao.iocoder.cn/</code> 返回 HTTP 200，静态资源 Last-Modified 2024-10-13；文档站 <code>https://doc.iocoder.cn/intro/</code> HTTP 200。JS 包内写有 API 根 <code>http://api-dashboard.yudao.iocoder.cn/admin-api</code>，同日对该前缀的只读请求得到 nginx 404。演示站不能证明等于本提交。</li>
+<li>本分析环境为 JDK 21 + Maven 3.9.4，工程声明 JDK 8 + Spring Boot 2.7.18，<strong>未执行</strong>模块测试或打包。</li>
+</ul>
+<div class="callout">配置文件中的数据源口令、第三方 client-secret、加解密密钥只在源码中存在，本报告不复述其值。</div>
+</section>
+<section id="reports">
+<h2>2. 报告分册</h2>
+<p>按 Skill 要求，用户路径与数据模型明显不同的模块分开出册。共享的登录、租户、菜单、文件、任务在业务分册中视为外部依赖。</p>
+
+<div class="index-grid">
+<a href="00-index.html"><strong>00 总册</strong><br>证据边界、目录索引、核验计数</a>
+<a href="01-platform-system-infra.html"><strong>01 平台分册</strong><br>system + infra 需求、设计、表、接口</a>
+<a href="02-business-modules.html"><strong>02 业务分册</strong><br>Mall / CRM / ERP / MES 等源码模块</a>
+</div>
+
+</section>
+<section id="catalog">
+<h2>3. 目录索引</h2>
+<p>下面列出本套报告的文件、章节、模块和主库表。侧栏可筛选；表名跳到平台分册对应字段定义。</p>
+<h3 id="catalog-files">分册文件</h3>
+
+<div class="index-grid">
+<a href="00-index.html"><strong>00 总册</strong><br>证据边界、目录索引、核验计数</a>
+<a href="01-platform-system-infra.html"><strong>01 平台分册</strong><br>system + infra 需求、设计、表、接口</a>
+<a href="02-business-modules.html"><strong>02 业务分册</strong><br>Mall / CRM / ERP / MES 等源码模块</a>
+</div>
+
+<h3 id="catalog-platform">平台分册章节</h3>
+
+<div class="index-grid">
+<a href="01-platform-system-infra.html#s1">1. 范围与证据</a>
+<a href="01-platform-system-infra.html#s2">2. 需求分析</a>
+<a href="01-platform-system-infra.html#s2-catalog">功能目录</a>
+<a href="01-platform-system-infra.html#s3">3. 系统设计</a>
+<a href="01-platform-system-infra.html#s3-login">登录时序</a>
+<a href="01-platform-system-infra.html#s3-user">新增用户时序</a>
+<a href="01-platform-system-infra.html#s4">4. 数据库设计</a>
+<a href="01-platform-system-infra.html#s4-rbac">身份权限 ER</a>
+<a href="01-platform-system-infra.html#s4-fields">主库字段表</a>
+<a href="01-platform-system-infra.html#s5">5. 前端页面</a>
+<a href="01-platform-system-infra.html#s6">6. 接口与类</a>
+<a href="01-platform-system-infra.html#s6-api">端点目录</a>
+<a href="01-platform-system-infra.html#s7">7. 开发测试部署</a>
+</div>
+
+<h3 id="catalog-biz">业务模块</h3>
+<div class="index-grid"><a href="02-business-modules.html#m-mall">商城</a><a href="02-business-modules.html#m-member">会员</a><a href="02-business-modules.html#m-bpm">工作流</a><a href="02-business-modules.html#m-pay">支付</a><a href="02-business-modules.html#m-mp">公众号</a><a href="02-business-modules.html#m-crm">CRM</a><a href="02-business-modules.html#m-erp">ERP</a><a href="02-business-modules.html#m-ai">AI</a><a href="02-business-modules.html#m-iot">IoT</a><a href="02-business-modules.html#m-mes">MES</a><a href="02-business-modules.html#m-wms">WMS</a><a href="02-business-modules.html#m-hrm">HRM</a><a href="02-business-modules.html#m-fms">FMS</a><a href="02-business-modules.html#m-pms">PMS</a><a href="02-business-modules.html#m-oa">OA</a><a href="02-business-modules.html#m-im">IM</a><a href="02-business-modules.html#m-report">报表</a></div>
+<h3 id="catalog-tables">主库表（48）</h3>
+
+<div class="toolbar">
+<label>检索 <input type="search" id="idx-tables-q" oninput="filterRows('idx-tables-q','idx-tables')"></label>
+<span class="muted">可见 <b id="idx-tables-count">48</b> / 48</span>
+</div>
+<table id="idx-tables"><thead><tr><th>表名</th><th>中文</th><th>列数</th><th>域</th></tr></thead><tbody><tr><td><a href="01-platform-system-infra.html#tbl-infra_api_access_log">infra_api_access_log</a></td><td>API 访问日志表</td><td>25</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_api_error_log">infra_api_error_log</a></td><td>系统异常日志</td><td>28</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_codegen_column">infra_codegen_column</a></td><td>代码生成表字段定义</td><td>23</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_codegen_table">infra_codegen_table</a></td><td>代码生成表定义</td><td>24</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_config">infra_config</a></td><td>参数配置表</td><td>13</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_data_source_config">infra_data_source_config</a></td><td>数据源配置表</td><td>10</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_file">infra_file</a></td><td>文件表</td><td>12</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_file_config">infra_file_config</a></td><td>文件配置表</td><td>11</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_file_content">infra_file_content</a></td><td>文件表</td><td>9</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_job">infra_job</a></td><td>定时任务表</td><td>14</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-infra_job_log">infra_job_log</a></td><td>定时任务日志表</td><td>15</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_dept">system_dept</a></td><td>部门表</td><td>14</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_dict_data">system_dict_data</a></td><td>字典数据表</td><td>14</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_dict_type">system_dict_type</a></td><td>字典类型表</td><td>11</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_login_log">system_login_log</a></td><td>系统访问记录</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_mail_account">system_mail_account</a></td><td>邮箱账号表</td><td>13</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_mail_log">system_mail_log</a></td><td>邮件日志表</td><td>23</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_mail_template">system_mail_template</a></td><td>邮件模版表</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_menu">system_menu</a></td><td>菜单权限表</td><td>19</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_notice">system_notice</a></td><td>通知公告表</td><td>11</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_notify_message">system_notify_message</a></td><td>站内信消息表</td><td>17</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_notify_template">system_notify_template</a></td><td>站内信模板表</td><td>14</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_oauth2_access_token">system_oauth2_access_token</a></td><td>OAuth2 访问令牌</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_oauth2_approve">system_oauth2_approve</a></td><td>OAuth2 批准表</td><td>13</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_oauth2_client">system_oauth2_client</a></td><td>OAuth2 客户端表</td><td>21</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_oauth2_code">system_oauth2_code</a></td><td>OAuth2 授权码表</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_oauth2_refresh_token">system_oauth2_refresh_token</a></td><td>OAuth2 刷新令牌</td><td>13</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_operate_log">system_operate_log</a></td><td>操作日志记录 V2 版本</td><td>20</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_post">system_post</a></td><td>岗位信息表</td><td>12</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_role">system_role</a></td><td>角色信息表</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_role_menu">system_role_menu</a></td><td>角色和菜单关联表</td><td>9</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_sms_channel">system_sms_channel</a></td><td>短信渠道</td><td>13</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_sms_code">system_sms_code</a></td><td>手机验证码</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_sms_log">system_sms_log</a></td><td>短信日志</td><td>27</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_sms_template">system_sms_template</a></td><td>短信模板</td><td>16</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_social_client">system_social_client</a></td><td>社交客户端表</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_social_user">system_social_user</a></td><td>社交用户表</td><td>16</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_social_user_bind">system_social_user_bind</a></td><td>社交绑定表</td><td>11</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_tenant">system_tenant</a></td><td>租户表</td><td>15</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_tenant_package">system_tenant_package</a></td><td>租户套餐表</td><td>10</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_user_post">system_user_post</a></td><td>用户岗位表</td><td>9</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_user_role">system_user_role</a></td><td>用户和角色关联表</td><td>9</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-system_users">system_users</a></td><td>用户信息表</td><td>20</td><td>system</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-yudao_demo01_contact">yudao_demo01_contact</a></td><td>示例联系人表</td><td>12</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-yudao_demo02_category">yudao_demo02_category</a></td><td>示例分类表</td><td>9</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-yudao_demo03_course">yudao_demo03_course</a></td><td>学生课程表</td><td>10</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-yudao_demo03_grade">yudao_demo03_grade</a></td><td>学生班级表</td><td>10</td><td>infra</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-yudao_demo03_student">yudao_demo03_student</a></td><td>学生表</td><td>11</td><td>infra</td></tr></tbody></table>
+
+<h3 id="catalog-quartz">Quartz 表</h3>
+
+<div class="toolbar">
+<label>检索 <input type="search" id="idx-quartz-q" oninput="filterRows('idx-quartz-q','idx-quartz')"></label>
+<span class="muted">可见 <b id="idx-quartz-count">11</b> / 11</span>
+</div>
+<table id="idx-quartz"><thead><tr><th>表名</th><th>列数</th></tr></thead><tbody><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_BLOB_TRIGGERS">QRTZ_BLOB_TRIGGERS</a></td><td>4</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_CALENDARS">QRTZ_CALENDARS</a></td><td>3</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_CRON_TRIGGERS">QRTZ_CRON_TRIGGERS</a></td><td>5</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_FIRED_TRIGGERS">QRTZ_FIRED_TRIGGERS</a></td><td>13</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_JOB_DETAILS">QRTZ_JOB_DETAILS</a></td><td>10</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_LOCKS">QRTZ_LOCKS</a></td><td>2</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_PAUSED_TRIGGER_GRPS">QRTZ_PAUSED_TRIGGER_GRPS</a></td><td>2</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_SCHEDULER_STATE">QRTZ_SCHEDULER_STATE</a></td><td>4</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_SIMPLE_TRIGGERS">QRTZ_SIMPLE_TRIGGERS</a></td><td>6</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_SIMPROP_TRIGGERS">QRTZ_SIMPROP_TRIGGERS</a></td><td>14</td></tr><tr><td><a href="01-platform-system-infra.html#tbl-QRTZ_TRIGGERS">QRTZ_TRIGGERS</a></td><td>16</td></tr></tbody></table>
+
+</section>
+<section id="counts">
+<h2>4. 核验计数</h2>
+<div class="kpi"><div><b>48</b><span>MySQL 主脚本表</span></div><div><b>711</b><span>主脚本列</span></div><div><b>11</b><span>Quartz 表</span></div><div><b>5</b><span>Quartz 物理 FK</span></div><div><b>326</b><span>H2 测试建表</span></div><div><b>419</b><span>菜单页组件</span></div><div><b>3293</b><span>解析到的 HTTP 操作</span></div><div><b>449</b><span>单元测试类</span></div></div>
+<p>主脚本物理 FOREIGN KEY = 0。逻辑外键（源码列约定）在平台分册单独画出。H2 <code>create_tables.sql</code> 是单测脚手架，不是默认安装库。</p>
+</section>
+
+<footer>独立 HTML。版本 v2026.08(jdk8/11)-47-g8e80602b87 / 8e80602b875f69158faf4c92445e67691821bf0f</footer>
+</div>
+</div>
+<script>
+function filterRows(input, tableId, extra){
+  const q=(document.getElementById(input).value||'').toLowerCase();
+  const extraVal=extra? (document.getElementById(extra).value||'').toLowerCase(): '';
+  document.querySelectorAll('#'+tableId+' tbody tr').forEach(tr=>{
+    const text=tr.innerText.toLowerCase();
+    tr.hidden = extraVal && extraVal!=='all' ? !text.includes(extraVal) || (q && !text.includes(q)) : (q && !text.includes(q));
+  });
+  const vis=[...document.querySelectorAll('#'+tableId+' tbody tr')].filter(tr=>!tr.hidden).length;
+  const out=document.getElementById(tableId+'-count');
+  if(out) out.textContent=vis;
+}
+function expandAll(open){
+  document.querySelectorAll('.wrap details').forEach(d=>d.open=open);
+}
+function filterToc(){
+  const q=(document.getElementById('toc-q').value||'').toLowerCase();
+  document.querySelectorAll('#toc-rail li').forEach(li=>{
+    const hit=!q || li.innerText.toLowerCase().includes(q);
+    li.hidden=!hit;
+    if(hit){
+      let p=li.parentElement;
+      while(p){
+        if(p.tagName==='DETAILS') p.open=true;
+        p=p.parentElement;
+      }
+    }
+  });
+}
+function initToc(){
+  const links=[...document.querySelectorAll('#toc-rail a[href^="#"]')];
+  const map=links.map(a=>{
+    const id=decodeURIComponent(a.getAttribute('href').slice(1));
+    return {a, el:document.getElementById(id)};
+  }).filter(x=>x.el);
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting) return;
+      links.forEach(a=>a.classList.remove('active'));
+      const hit=map.find(x=>x.el===en.target);
+      if(hit) hit.a.classList.add('active');
+    });
+  },{rootMargin:'0px 0px -70% 0px', threshold:0.1});
+  map.forEach(x=>io.observe(x.el));
+}
+document.addEventListener('DOMContentLoaded', initToc);
+</script>
+</body>
+</html>

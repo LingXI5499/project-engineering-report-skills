@@ -12,7 +12,7 @@
 2. 盘点前端路由与页面、后端接口与类层次、数据库迁移与物理表、测试与部署文件。
 3. 把重要业务从页面操作一路追到 API、鉴权、事务、持久化和失败态。
 4. 按规格写出完整报告：需求分析、系统设计、数据库与 ER、页面清单、接口与类、测试、部署与运维。
-5. 交付**单文件 HTML**（CSS / JavaScript 内嵌），不依赖 CDN，不在运行时去拉本地数据。
+5. 交付**单文件 HTML**（CSS / JavaScript 内嵌），不依赖 CDN，不在运行时去拉本地数据。每份报告带可检索的**目录索引**（分册、章节、模块、物理表锚点），打印时作为首页目录。
 
 显示名称：**软件工程全景报告**。Skill 目录名：`project-engineering-report`。
 
@@ -65,6 +65,8 @@ ER 图使用 Crow's Foot 基数，同时给出物理表名与中文业务名，�
 .
 ├── SKILL.md                              # Skill 入口：何时启用、如何取证、如何写报告
 ├── agents/openai.yaml                    # Codex 显示名与默认提示
+├── examples/
+│   └── ruoyi-vue-pro/                    # 一次完整分析示例（独立 HTML）
 ├── references/
 │   ├── report-spec.md                    # 报告章节规格
 │   ├── evidence-and-verification.md      # 仓库对比与线上只读核验
@@ -113,7 +115,19 @@ git clone https://github.com/LingXI5499/project-engineering-report-skills.git "$
 Use $project-engineering-report to inspect this project and generate a current-state HTML engineering report.
 ```
 
-生成结果应是可双击打开的 HTML 文件，目录可跳转，目录与检索在打印时仍可读。
+生成结果应是可双击打开的 HTML 文件，带可检索目录索引；目录与检索在打印时仍可读。
+
+## 分析示例
+
+[examples/ruoyi-vue-pro](examples/ruoyi-vue-pro) 是对本 Skill 的一次完整使用结果：分析 [YunaiV/ruoyi-vue-pro](https://github.com/YunaiV/ruoyi-vue-pro) 检出 `8e80602b875f`（`v2026.08(jdk8/11)-47-g8e80602b87`，`master`）。
+
+| 文件 | 内容 |
+| --- | --- |
+| [00-index.html](examples/ruoyi-vue-pro/00-index.html) | 总册：证据边界、分册/章节/模块/主库表目录索引、核验计数 |
+| [01-platform-system-infra.html](examples/ruoyi-vue-pro/01-platform-system-infra.html) | 平台分册：默认启用的 system + infra |
+| [02-business-modules.html](examples/ruoyi-vue-pro/02-business-modules.html) | 业务分册：源码中存在、默认未接入 Maven 的模块 |
+
+建议在该目录执行 `python -m http.server` 后打开总册，避免部分浏览器限制 `file://` 跨文件锚点。
 
 ## 许可
 

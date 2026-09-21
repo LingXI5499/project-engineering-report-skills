@@ -91,6 +91,7 @@ Show the actual class chain from route to persistence and response. Include a re
 
 - UTF-8, semantic headings, stable internal anchors, responsive layout, and print styles.
 - Embedded CSS and JavaScript only; no network dependency for presentation.
+- A linked catalog index (目录索引): sticky sidebar or equivalent covering report files, sections, modules, and physical tables; searchable; print as the first directory page.
 - Search and filters for pages, tables, endpoints, and classes.
 - Collapsible detail sections with visible summaries and accessible controls.
 - Tables that remain readable on narrow screens and in print.
