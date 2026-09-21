@@ -12,9 +12,21 @@
 2. 盘点前端路由与页面、后端接口与类层次、数据库迁移与物理表、测试与部署文件。
 3. 把重要业务从页面操作一路追到 API、鉴权、事务、持久化和失败态。
 4. 按规格写出完整报告：需求分析、系统设计、数据库与 ER、页面清单、接口与类、测试、部署与运维。
-5. 交付**单文件 HTML**（CSS / JavaScript 内嵌），不依赖 CDN，不在运行时去拉本地数据。每份报告带可检索的**目录索引**（分册、章节、模块、物理表锚点），打印时作为首页目录。
+5. 交付**单文件 HTML**（CSS / JavaScript 内嵌），不依赖 CDN，不在运行时去拉本地数据。所有报告使用固定的「**星雨笔录 · 软件工程全景报告**」日间阅读主题，带可检索的**目录索引**（分册、章节、模块、物理表锚点），打印时作为首页目录，并只提供原生「导出 PDF」入口。
 
-显示名称：**软件工程全景报告**。Skill 目录名：`project-engineering-report`。
+显示名称：**星雨笔录 · 软件工程全景报告**。Skill 目录名：`project-engineering-report`。
+
+## 统一主题与 PDF 导出
+
+报告品牌固定为「星雨笔录 · 软件工程全景报告」（英文眉题为 `STAR RAIN NOTES · ENGINEERING REPORT`）；被分析项目的名称仍由仓库证据决定，绝不被品牌替代。视觉采用星雨笔录日间教程页面的冷白、深蓝、浅蓝表头与卡片式阅读层级，宽屏为粘性目录加正文，窄屏自动单栏。
+
+唯一导出方式是每份 HTML 右下角的「导出 PDF」按钮。它调用浏览器原生打印面板，用户选择“另存为 PDF”即可离线导出；不依赖第三方服务，也不提供其他导出格式。模板会在打印前展开正文细节，打印后恢复阅读状态，并以 A4 目录首页输出。
+
+生成者必须从 [`templates/starrain-notes-light.html`](templates/starrain-notes-light.html) 开始，并在交付前运行：
+
+```bash
+python scripts/validate_report_html.py path/to/report.html
+```
 
 ## 适合用 / 不适合用
 
@@ -67,12 +79,15 @@ ER 图使用 Crow's Foot 基数，同时给出物理表名与中文业务名，�
 ├── agents/openai.yaml                    # Codex 显示名与默认提示
 ├── examples/
 │   └── ruoyi-vue-pro/                    # 一次完整分析示例（独立 HTML）
+├── templates/
+│   └── starrain-notes-light.html          # 固定品牌、日间阅读与 PDF 导出基线
 ├── references/
 │   ├── report-spec.md                    # 报告章节规格
 │   ├── evidence-and-verification.md      # 仓库对比与线上只读核验
 │   └── er-and-class-design.md            # ER 图与类设计约定
 └── scripts/
-    └── extract_flyway_schema.py          # 从 Flyway 迁移抽出初始表结构清单
+    ├── extract_flyway_schema.py          # 从 Flyway 迁移抽出初始表结构清单
+    └── validate_report_html.py            # 统一主题与 PDF 外壳检查
 ```
 
 `extract_flyway_schema.py` 只做 Flyway 的初步盘点。生成报告前仍需人工（由 Agent）核对厂商方言、重命名、动态 SQL、触发器、视图和跨表规则。

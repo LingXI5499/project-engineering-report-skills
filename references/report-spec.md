@@ -91,9 +91,11 @@ Show the actual class chain from route to persistence and response. Include a re
 
 - UTF-8, semantic headings, stable internal anchors, responsive layout, and print styles.
 - Embedded CSS and JavaScript only; no network dependency for presentation.
+- The report identity is fixed: `星雨笔录 · 软件工程全景报告` and `STAR RAIN NOTES · ENGINEERING REPORT`. The analyzed product name is separate, comes from evidence, and leads the document title. Follow [星雨笔录日间报告主题](starrain-notes-light-theme.md) and copy the supplied HTML baseline rather than composing a one-off stylesheet.
 - A linked catalog index (目录索引): sticky sidebar or equivalent covering report files, sections, modules, and physical tables; searchable; print as the first directory page.
 - Search and filters for pages, tables, endpoints, and classes.
 - Collapsible detail sections with visible summaries and accessible controls.
 - Tables that remain readable on narrow screens and in print.
 - SVG diagrams with legends, markers, readable labels, and text descriptions.
+- The sole export control is `导出 PDF`. It must call `window.print()` and be accompanied by A4 print rules that hide interactive controls, place the directory first, expand body details during printing, and restore their prior state afterwards. Do not add other export formats.
 - A generated-at timestamp may be included, but the report's project version must come from repository evidence.

@@ -31,7 +31,7 @@ Follow [references/report-spec.md](references/report-spec.md). Give requirements
 
 When modules have distinct user journeys or data models, create separate standalone reports for them. Keep shared identity, media, authentication, and infrastructure visible as external dependencies in each report rather than duplicating ownership.
 
-Generate standalone UTF-8 HTML with embedded CSS and JavaScript. Do not rely on a CDN or fetch local data at runtime. Include a linked catalog index (目录索引) covering report files, sections, modules, and physical tables; keep it sticky and searchable on screen, and print it as the first directory page. Also include readable print styles, searchable catalogs, expandable detail blocks, and diagrams that remain understandable when printed.
+Generate standalone UTF-8 HTML with embedded CSS and JavaScript. Do not rely on a CDN or fetch local data at runtime. **The visual shell is mandatory:** read [references/starrain-notes-light-theme.md](references/starrain-notes-light-theme.md) and start from [templates/starrain-notes-light.html](templates/starrain-notes-light.html). Every report, including the catalog index and every module volume, must carry the fixed report brand `星雨笔录 · 软件工程全景报告` / `STAR RAIN NOTES · ENGINEERING REPORT`; the analyzed product name remains evidence-derived and separate from that brand. Include a linked catalog index (目录索引) covering report files, sections, modules, and physical tables; keep it sticky and searchable on screen, and print it as the first directory page. The only export control is the fixed `导出 PDF` button, which invokes the browser's native print dialog for Save as PDF. Also include readable print styles, searchable catalogs, expandable detail blocks, and diagrams that remain understandable when printed.
 
 For database and class documentation, follow [references/er-and-class-design.md](references/er-and-class-design.md). The ER diagram must use Crow's Foot cardinality, show physical table names with Chinese business names, expose key fields and SQL types, identify PK and FK columns, and match the actual foreign keys. Also provide field tables because a diagram alone is not a schema specification.
 
@@ -41,5 +41,5 @@ For database and class documentation, follow [references/er-and-class-design.md]
 - Confirm every page, endpoint, table, relation, and class named in the report exists in the target version.
 - Check both ends of every ER relation, its cardinality, FK column, referenced key, and delete behavior.
 - Parse or smoke-test embedded JavaScript and confirm generated SVG diagrams are non-empty.
-- Check HTML structure, internal anchors, search and filter controls, print layout, and absence of placeholders.
+- Check HTML structure, internal anchors, search and filter controls, print layout, PDF export button, and absence of placeholders. Run `python scripts/validate_report_html.py <report.html> [<report.html> ...]` for every generated HTML volume, then open a print preview to confirm the A4 directory page and PDF flow.
 - Open the final files locally and make sure Chinese text, diagrams, and navigation render correctly.

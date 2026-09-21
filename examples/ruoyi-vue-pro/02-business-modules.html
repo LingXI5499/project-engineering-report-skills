@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>业务模块分册 — ruoyi-vue-pro</title>
+<title>ruoyi-vue-pro 业务分册｜星雨笔录软件工程全景报告</title>
 <style>
 :root { --bg:#f4f1ea; --paper:#fff; --ink:#1c1917; --muted:#57534e; --line:#d6d3d1; --accent:#9a3412; --ok:#166534; --warn:#92400e; --chip:#e7e5e4; --rail:280px; }
 *{box-sizing:border-box}
@@ -69,6 +69,11 @@ footer{color:var(--muted);font-size:12px;margin-top:24px}
   .wrap{padding:12px}
 }
 </style>
+<style>
+/* 星雨笔录 · 软件工程全景报告：统一日间阅读主题 */
+:root{--bg:#f5f8fc;--paper:#fff;--ink:#15233b;--muted:#60708a;--line:#dbe4f0;--accent:#2766d8;--ok:#17865f;--warn:#a85e00;--chip:#e8f1ff;--rail:260px}body{font:15px/1.75 "Microsoft YaHei","PingFang SC",Arial,sans-serif}.toc-rail{top:18px;height:calc(100vh - 36px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px #182f5b12;padding:16px}.toc-rail a{color:#465572;padding:4px 7px}.toc-rail a:hover,.toc-rail a.active{background:#edf4ff;color:var(--accent)}.wrap{max-width:1050px;padding:28px}.report-brand{margin:0 0 10px;letter-spacing:2px;font-size:13px;font-weight:700;color:#bfefff}header.hero{border:0;border-radius:0;padding:46px max(5vw,30px) 40px;background:radial-gradient(circle at 85% 20%,#a9e6f4 0,#e3f4fa 22%,transparent 47%),linear-gradient(135deg,#172a55,#275ab6 60%,#307fc8);color:#fff;box-shadow:none}header.hero h1{font-size:clamp(29px,4vw,48px);line-height:1.2}.meta{color:#e6f0ff}section{border-radius:12px;padding:28px;box-shadow:0 10px 28px #182f5b12}h2{color:var(--ink);border-bottom:2px solid #dbe8fc;padding-bottom:10px}th{background:#edf4ff;color:#264572}.callout{background:#eef5ff}.export-pdf{position:fixed;right:20px;bottom:18px;border:0;background:#1959c8;color:#fff;border-radius:24px;padding:10px 16px;font:inherit;box-shadow:0 5px 18px #153e8855;cursor:pointer}.export-pdf:hover{background:#124ba9}@page{size:A4;margin:12mm}@media print{.export-pdf{display:none!important}.toc-rail{position:static;height:auto;border:0;border-radius:0;box-shadow:none;page-break-after:always}.layout{display:block}.wrap{max-width:none;padding:0}header.hero{background:#fff;color:#15233b;padding:0 0 8mm}.report-brand{color:#2766d8}section{border:0;box-shadow:none;padding:0;margin:0 0 8mm}a{color:inherit;text-decoration:none}}
+</style>
+<style>@media print{.toolbar,input,select,button{display:none!important}}</style>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
@@ -84,6 +89,7 @@ footer{color:var(--muted);font-size:12px;margin-top:24px}
 <div class="wrap" id="main">
 
 <header class="hero">
+<p class="report-brand">STAR RAIN NOTES · ENGINEERING REPORT</p>
 <h1>业务模块分册</h1>
 <p>这些模块的 Java 源码在 8e80602b875f 中完整存在，但根 POM 与 yudao-server 默认注释其依赖。
 启用方式见官方文档；未启用时 <code>DefaultController</code> 对多数前缀返回“已禁用”。</p>
@@ -427,9 +433,10 @@ footer{color:var(--muted);font-size:12px;margin-top:24px}
 <table id="d-report"><thead><tr><th>表(注解)</th><th>类</th><th>注释</th><th>文件</th></tr></thead><tbody><tr><td></td><td>GoViewProjectDO</td><td>GoView 项目表</td><td>yudao-module-report/src/main/java/cn/iocoder/yudao/module/report/dal/dataobject/goview/GoViewProjectDO.java</td></tr></tbody></table>
 <h3 id='m-report-sql'>测试库表字段</h3><details id='tbl-report_go_view_project'><summary>report_go_view_project GoView 项目表 · 11 列 · 来源 yudao-module-report/src/test/resources/sql/create_tables.sql</summary><p>主键：id。普通索引：无。</p><ul>无物理外键。</ul><table><thead><tr><th>列</th><th>类型</th><th>中文</th><th>可空</th><th>默认</th><th>角色</th><th>自增</th></tr></thead><tbody><tr><td>id</td><td>BIGINT NOT</td><td></td><td>是</td><td>AS</td><td>PK</td><td></td></tr><tr><td>name</td><td>VARCHAR NOT</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>pic_url</td><td>VARCHAR</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>content</td><td>VARCHAR</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>status</td><td>VARCHAR NOT</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>remark</td><td>VARCHAR</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>creator</td><td>VARCHAR DEFAULT</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>create_time</td><td>DATETIME NOT</td><td></td><td>是</td><td>CURRENT_TIMESTAMP</td><td></td><td></td></tr><tr><td>updater</td><td>VARCHAR DEFAULT</td><td></td><td>是</td><td></td><td></td><td></td></tr><tr><td>update_time</td><td>DATETIME NOT</td><td></td><td>是</td><td>CURRENT_TIMESTAMP</td><td></td><td></td></tr><tr><td>deleted</td><td>BIT NOT</td><td></td><td>是</td><td>FALSE</td><td></td><td></td></tr></tbody></table></details></section>
 
-<footer>业务分册 · 共享登录与租户见平台分册 · 8e80602b875f69158faf4c92445e67691821bf0f</footer>
+<footer>星雨笔录 · 软件工程全景报告 · 业务分册 · 共享登录与租户见平台分册 · 8e80602b875f69158faf4c92445e67691821bf0f</footer>
 </div>
 </div>
+<button class="export-pdf" id="export-pdf" type="button">导出 PDF</button>
 <script>
 function filterRows(input, tableId, extra){
   const q=(document.getElementById(input).value||'').toLowerCase();
@@ -476,6 +483,10 @@ function initToc(){
   map.forEach(x=>io.observe(x.el));
 }
 document.addEventListener('DOMContentLoaded', initToc);
+let starrainOpen=[];
+function starrainBeforePrint(){starrainOpen=[...document.querySelectorAll('.wrap details')].map(d=>[d,d.open]);document.querySelectorAll('.wrap details').forEach(d=>d.open=true)}
+function starrainAfterPrint(){starrainOpen.forEach(([d,open])=>d.open=open);starrainOpen=[]}
+window.addEventListener('beforeprint',starrainBeforePrint);window.addEventListener('afterprint',starrainAfterPrint);document.getElementById('export-pdf').addEventListener('click',()=>window.print());
 </script>
 </body>
 </html>

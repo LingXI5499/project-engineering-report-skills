@@ -1,6 +1,6 @@
 # 示例：YunaiV/ruoyi-vue-pro
 
-这是用本仓库 Skill 对 [YunaiV/ruoyi-vue-pro](https://github.com/YunaiV/ruoyi-vue-pro) 做的一次完整分析产物。打开 [00-index.html](00-index.html) 作为总册；左侧为可检索目录索引，可跳到分册、章节、模块和每一张主库表。
+这是用本仓库 Skill 对 [YunaiV/ruoyi-vue-pro](https://github.com/YunaiV/ruoyi-vue-pro) 做的一次完整分析产物。三个分册已统一为「星雨笔录 · 软件工程全景报告」日间主题。打开 [00-index.html](00-index.html) 作为总册；左侧为可检索目录索引，可跳到分册、章节、模块和每一张主库表。
 
 ## 证据边界
 
@@ -27,4 +27,4 @@ python -m http.server 8765
 
 然后打开 `http://127.0.0.1:8765/00-index.html`。部分浏览器对 `file://` 限制跨 HTML 锚点跳转。
 
-打印时，粘性侧栏会作为第一页目录输出。
+每个 HTML 右下角都有唯一的「导出 PDF」按钮：在浏览器打印面板选择“另存为 PDF”。打印时，粘性侧栏会作为第一页目录输出，正文折叠项会临时展开，完成后恢复原状态。
